@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.jtc.Hibernate">
+	<class name="Student" table="myStudent">
+		<id name="sid" column="sid" type="int">
+			<generator class="increment" />
+		</id>
+		<property name="sname" />
+		<property name="email" />
+		<property name="phone" />
+
+		<joined-subclass name="CurrentStudent"
+			table="cStudent">
+			<key column="sid" />
+			<property name="feebal" type="double" />
+			<property name="timing" />
+			<property name="trainer" />
+
+			<joined-subclass name="WeekdayStudent"
+				table="wdstudents">
+				<key column="sid" />
+				<property name="yop" />
+				<property name="percentage" />
+				<property name="qualification" /> 
+			</joined-subclass>
+
+			<joined-subclass name="WeekandStudent"
+				table="wdstudents">
+				<key column="sid" />
+				<property name="wesalary" type="double" />
+				<property name="wecompanyName" />
+				<property name="wemail" />
+			</joined-subclass>
+		</joined-subclass>
+
+		<joined-subclass name="OldStudent" table="ostudent">
+			<key column="sid" />
+			<property name="osalary" type="double" />
+			<property name="ocompanyName" />
+			<property name="oemail" />
+		</joined-subclass>
+
+	</class>
+</hibernate-mapping>    
